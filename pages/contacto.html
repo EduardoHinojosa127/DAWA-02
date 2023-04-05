@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="../css/index.css" />
+    <meta charset="UTF-8" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+      crossorigin="anonymous"
+    ></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <title>Formulario de contacto</title>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">Game Corp &copy;</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link active" aria-current="page" href="/"
+              >Bienvenidos</a
+            >
+            <a class="nav-link" href="/nosotros">Nosotros</a>
+            <a class="nav-link" href="/servicios">Servicios</a>
+            <a class="nav-link" href="/contacto">Contáctenos</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <script>
+      function validarFormulario(event) {
+        event.preventDefault(); // Evita que se envíen los datos por URL
+
+        // Obtenemos los valores de los campos del formulario
+        const nombre = document.getElementById("nombre").value;
+        const correo = document.getElementById("correo").value;
+        const mensaje = document.getElementById("mensaje").value;
+        const numero = document.getElementById("numero").value;
+        const fecha = document.getElementById("fecha").value;
+
+        // Validamos que los campos no estén vacíos
+        if (nombre === "" || correo === "" || mensaje === "" || !fecha || !numero) {
+          alert("Por favor, completa todos los campos del formulario.");
+          return;
+        }
+
+        // Validamos el formato del correo electrónico
+        const expresionCorreo = /\S+@\S+\.\S+/;
+        if (!expresionCorreo.test(correo)) {
+          alert("Por favor, ingresa un correo electrónico válido.");
+          return;
+        }
+        if (numero < 900000000 || numero > 1000000000) {
+          alert("El número debe ser de 9 dígitos");
+          return false; // Detiene el envío del formulario
+        }
+        if (fecha === "" || isNaN(Date.parse(fecha))) {
+          alert("Ingrese una fecha válida");
+          return false; // Detiene el envío del formulario
+        }
+
+        // Si el formulario es válido, podemos enviar los datos o hacer cualquier otra acción necesaria
+        alert("El formulario ha sido enviado correctamente.");
+        window.location.href = "/prueba";
+      }
+    </script>
+  </head>
+  <body class="bg-dark">
+    <header class="masthead bg-dark text-white text-center">
+      <div class="container">
+        <h1>Formulario de contacto</h1>
+
+        <form id="formulario" method="post" class="m-10">
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Nombre</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="nombre"
+              placeholder="name@example.com"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Email address</label
+            >
+            <input
+              type="email"
+              class="form-control"
+              id="correo"
+              placeholder="name@example.com"
+            />
+          </div>
+          <div class="form-group">
+            <label for="numero">Ingrese un número:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="numero"
+              name="numero"
+              min="9"
+              max="9"
+            />
+          </div>
+          <div class="form-group">
+            <label for="fecha">Fecha:</label>
+            <input type="date" class="form-control" id="fecha" name="fecha" />
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label"
+              >Example textarea</label
+            >
+            <textarea class="form-control" id="mensaje" rows="3"></textarea>
+          </div>
+
+          <input
+            class="btn btn-dark"
+            type="submit"
+            value="Enviar"
+            onclick="validarFormulario(event)"
+          />
+        </form>
+      </div>
+      <div class="container-fluid bg-black">
+        <div class="copyright py-4 text-center text-white">
+          <i class="fa fa-apple" id="apple"></i>
+          <i class="fa fa-twitter" id="twitter"></i>
+          <i class="fa fa-github-square github" id="github"></i>
+          <i class="fa fa-facebook-square" id="facebook"></i>
+          <div class="container">
+            <small>Copyright &copy; Your Website 2023</small>
+          </div>
+        </div>
+      </div>
+    </header>
+  </body>
+</html>
